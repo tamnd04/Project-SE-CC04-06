@@ -1,5 +1,7 @@
 # Project-SE-CC04-06
 A model for HCMUT_SPSS
+
+# Overview
 HCMUT_SSPS is a smart printing service designed to help HCMUT students utilize campus printing facilities more effectively. Through this system, students can pre-order their print jobs, avoiding queueing using the traditional method. The platform also stores detailed records of each print order, including document metadata, quantity, date, time, and location. Students can access and review their complete usage history at any time.
 
 The system is overseen by the Student Printing Service Officer (SPSO), who manages system configurations, oversees printer operations, and monitors the performance and statistics of HCMUT_SSPS. Additionally, the SPSO has access to users' printing histories.
