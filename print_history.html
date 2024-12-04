@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">  
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">  
+  <link rel="stylesheet" href="./css/print_history.css">  
+  <script defer src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script defer src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+  <script defer src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+  <script defer src="print_history.js"></script>
+
+  <style>
+   a,
+   button,
+   input,
+   select,
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   * {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+       border: none;
+       text-decoration: none;
+       background: none;
+   
+       -webkit-font-smoothing: antialiased;
+   }
+   
+   menu, ol, ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+   }
+   </style>
+
+</head>
+<body>
+  <div class="home-students">
+    <div class="rectangle-1"></div>
+    <div class="group-4">
+      <div class="hcmut-ssps">
+        HCMUT
+        <br />
+        SSPS
+      </div>
+    </div> 
+
+    <img class="_01-logobachkhoatoi-1" src="image_src/logobk.png" />
+    <div class="lichsuinan">LỊCH SỬ IN ẤN</div>
+    <a href="">
+      <div class="tao-ban-in">
+        <div class="group-1">
+          <div class="tao-ban-in-moi">Tạo bản in mới</div>
+          <img class="vector" src="image_src/+.svg" />
+        </div>
+      </div>
+    </a>
+    <a href="student_homepage.html">
+      <div class="trang-chu2">
+        <img class="vector2" src="image_src/home.svg" />
+        <div class="trang-chu3">Trang chủ</div>
+      </div>
+    </a>
+    <a href="print_history.html">
+      <div class="lich-su-in">
+        <img class="vector5" src="image_src/history.svg" />
+        <div class="lich-su-in-an">Lịch sử in ấn</div>
+      </div>
+    </a>
+    <a href="">
+      <div class="mua-trang-in">
+        <img class="vector3" src="image_src/shopping_cart.svg" />
+        <div class="mua-trang-in2">Mua trang in</div>
+      </div>
+    </a>
+    <div class="khac">
+      <img class="dot" src="image_src/3dot.svg" />
+      <div class="khac2">Khác</div>
+    </div>
+    <a href="LoginAs.html">
+      <div class="ng-xu-t">
+        <img class="logout-24-outline" src="image_src/login-24-outline0.svg" />
+        <div class="ng-xu-t2">Đăng xuất</div>
+      </div>
+    </a>
+    <div class="container">
+      <table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Tên tệp</th>
+                <th>Thời gian in</th>
+                <th>Mã máy in</th>
+                <th>Số trang</th>
+                <th>Số bản</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Fimga_tutorial.pdf</td>
+                <td>25/04/2024 12:43:55</td>
+                <td>LTK-B4</td>
+                <td>3</td>
+                <td>2</td>
+            </tr>     
+            <tr>
+              <td>Lab1.docx</td>
+              <td>22/07/2024 11:22:55</td>
+              <td>LTK-A3</td>
+              <td>5</td>
+              <td>1</td>
+            </tr>     
+         
+            <tr>
+            <td>Assingment1_SofEn.pdf</td>
+            <td>05/12/2024 9:12:21</td>
+            <td>LTK-C6</td>
+            <td>32</td>
+            <td>1</td>
+            </tr>     
+            <tr>
+            <td>Lich_Su_Dang.docx</td>
+            <td>12/03/2024 11:22:55</td>
+            <td>DA-H1</td>
+            <td>9</td>
+            <td>4</td>
+            </tr>     
+            <tr>
+              <td>Math_Algebra_Introduction.pdf</td>
+              <td>25/04/2024 12:43:55</td>
+              <td>LTK-B4</td>
+              <td>15</td>
+              <td>2</td>
+          </tr>
+          <tr>
+              <td>Math_Calculus_Theory.pdf</td>
+              <td>26/04/2024 09:12:40</td>
+              <td>LTK-A4</td>
+              <td>12</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>Physics_Newton_Laws.pdf</td>
+              <td>27/04/2024 11:23:30</td>
+              <td>LTK-C6</td>
+              <td>18</td>
+              <td>3</td>
+          </tr>
+          <tr>
+              <td>Chemistry_Acids_and_Bases.pdf</td>
+              <td>28/04/2024 08:15:25</td>
+              <td>DA-H1</td>
+              <td>22</td>
+              <td>2</td>
+          </tr>
+          <tr>
+              <td>English_Literature_Shakespeare.pdf</td>
+              <td>29/04/2024 13:55:12</td>
+              <td>DA-H7</td>
+              <td>10</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>History_World_War_II.pdf</td>
+              <td>30/04/2024 14:02:55</td>
+              <td>LTK-B4</td>
+              <td>20</td>
+              <td>2</td>
+          </tr>
+          <tr>
+              <td>Geography_Europe_Map.pdf</td>
+              <td>01/05/2024 09:30:11</td>
+              <td>LTK-A4</td>
+              <td>14</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>Biology_Human_Cell_Structure.pdf</td>
+              <td>02/05/2024 10:25:43</td>
+              <td>LTK-C6</td>
+              <td>17</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>Literature_Shakespeare_Quotes.pdf</td>
+              <td>03/05/2024 11:40:29</td>
+              <td>DA-H1</td>
+              <td>8</td>
+              <td>3</td>
+          </tr>
+          <tr>
+              <td>Math_Statistics_Basics.pdf</td>
+              <td>04/05/2024 14:12:50</td>
+              <td>DA-H7</td>
+              <td>16</td>
+              <td>2</td>
+          </tr>
+          <tr>
+              <td>Physics_Electricity_Fundamentals.pdf</td>
+              <td>05/05/2024 15:00:45</td>
+              <td>LTK-B4</td>
+              <td>19</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>Chemistry_Periodic_Table_Overview.pdf</td>
+              <td>06/05/2024 08:50:55</td>
+              <td>LTK-A4</td>
+              <td>11</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>History_Renaissance_Era_Art.pdf</td>
+              <td>07/05/2024 13:25:01</td>
+              <td>LTK-C6</td>
+              <td>30</td>
+              <td>2</td>
+          </tr>
+          <tr>
+              <td>Biology_Animal_Cell_Structure.pdf</td>
+              <td>08/05/2024 14:22:44</td>
+              <td>DA-H1</td>
+              <td>25</td>
+              <td>3</td>
+          </tr>
+          <tr>
+              <td>English_Language_Grammar_Review.pdf</td>
+              <td>09/05/2024 10:14:35</td>
+              <td>DA-H7</td>
+              <td>18</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>Geography_Asia_Countries.pdf</td>
+              <td>10/05/2024 11:55:29</td>
+              <td>LTK-B4</td>
+              <td>14</td>
+              <td>2</td>
+          </tr>
+          <tr>
+              <td>Math_Linear_Equations_Solutions.pdf</td>
+              <td>11/05/2024 12:23:34</td>
+              <td>LTK-A4</td>
+              <td>13</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>Physics_Heat_Transfer.pdf</td>
+              <td>12/05/2024 14:30:20</td>
+              <td>LTK-C6</td>
+              <td>24</td>
+              <td>3</td>
+          </tr>
+          <tr>
+              <td>Chemistry_Organic_Chemistry_Intro.pdf</td>
+              <td>13/05/2024 10:05:35</td>
+              <td>DA-H1</td>
+              <td>28</td>
+              <td>2</td>
+          </tr>
+          <tr>
+              <td>History_Industrial_Revolution.pdf</td>
+              <td>14/05/2024 13:45:01</td>
+              <td>DA-H7</td>
+              <td>22</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>Biology_DNA_Structure.pdf</td>
+              <td>15/05/2024 09:20:22</td>
+              <td>LTK-B4</td>
+              <td>18</td>
+              <td>2</td>
+          </tr>
+          <tr>
+              <td>English_Speech_Writing.pdf</td>
+              <td>16/05/2024 11:05:00</td>
+              <td>LTK-A4</td>
+              <td>16</td>
+              <td>3</td>
+          </tr>
+          <tr>
+              <td>Geography_Africa_Landforms.pdf</td>
+              <td>17/05/2024 12:34:22</td>
+              <td>LTK-C6</td>
+              <td>20</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>Math_Pythagorean_Theorem.pdf</td>
+              <td>18/05/2024 10:15:30</td>
+              <td>DA-H1</td>
+              <td>12</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>Physics_Waves_and_Sound.pdf</td>
+              <td>19/05/2024 13:50:05</td>
+              <td>DA-H7</td>
+              <td>26</td>
+              <td>2</td>
+          </tr>
+          <tr>
+              <td>Chemistry_Acid_Base_Reactions.pdf</td>
+              <td>20/05/2024 09:20:45</td>
+              <td>LTK-B4</td>
+              <td>14</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>History_Ancient_Greece_Philosophy.pdf</td>
+              <td>21/05/2024 11:35:55</td>
+              <td>LTK-A4</td>
+              <td>19</td>
+              <td>3</td>
+          </tr>
+          <tr>
+              <td>Literature_Modern_Literature_Themes.pdf</td>
+              <td>22/05/2024 15:40:10</td>
+              <td>LTK-C6</td>
+              <td>17</td>
+              <td>2</td>
+          </tr>
+          <tr>
+              <td>Geography_Oceania.pdf</td>
+              <td>23/05/2024 12:25:55</td>
+              <td>DA-H1</td>
+              <td>13</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>Biology_Respiratory_System.pdf</td>
+              <td>24/05/2024 14:50:12</td>
+              <td>DA-H7</td>
+              <td>28</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>Math_Probability_Basics.pdf</td>
+              <td>25/05/2024 09:35:25</td>
+              <td>LTK-B4</td>
+              <td>16</td>
+              <td>2</td>
+          </tr>
+          <tr>
+              <td>Physics_Quantum_Mechanics.pdf</td>
+              <td>26/05/2024 13:15:47</td>
+              <td>LTK-A4</td>
+              <td>25</td>
+              <td>3</td>
+          </tr>
+          <tr>
+              <td>Chemistry_Energy_Changes.pdf</td>
+              <td>27/05/2024 11:40:05</td>
+              <td>LTK-C6</td>
+              <td>18</td>
+              <td>1</td>
+          </tr>
+          <tr>
+              <td>History_French_Revolution.pdf</td>
+              <td>28/05/2024 14:22:30</td>
+              <td>DA-H1</td>
+              <td>12</td>
+              <td>3</td>
+          </tr>
+      </table>
+    </div>
+
+  </div>
+</body>
+</html>
