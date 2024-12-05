@@ -1,0 +1,321 @@
+body {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden; /* Disable scrolling */
+}
+
+.home-students,
+.home-students * {
+  box-sizing: border-box;
+}
+.home-students {
+  background: #ffffff;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 0.0625rem; /* 1px */
+  height: 64rem; /* 1024px */
+  position: relative;
+  overflow: hidden;
+}
+.rectangle-1 {
+  background: #030391;
+  width: 18rem; /* 288px */
+  height: 64rem; /* 1024px */
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.logo {
+  position: absolute;
+  inset: 0;
+}
+.group-4 {
+  width: 10.875rem; /* 174px */
+  height: 6rem; /* 96px */
+  position: static;
+}
+.hcmut-ssps {
+  color: #f7f5f6;
+  text-align: center;
+  font-family: "Arial-Bold", sans-serif;
+  font-size: 3rem; /* 48px */
+  line-height: 100%;
+  font-weight: 700;
+  position: absolute;
+  left: 6.0625rem; /* 97px */
+  top: 2.625rem; /* 42px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+._01-logobachkhoatoi-1 {
+  width: 10.4375rem; /* 167px */
+  height: 7.375rem; /* 118px */
+  position: absolute;
+  left: -2.4375rem; /* -39px */
+  top: 2.25rem; /* 36px */
+  object-fit: cover;
+}
+.lichsuinan {
+  color: #030391;
+  text-align: center;
+  font-family: "Arial-Bold", sans-serif;
+  font-size: 2.5rem; /* 40px */
+  line-height: 1rem; /* 16px */
+  letter-spacing: 0.03125rem; /* 0.5px */
+  font-weight: 700;
+  position: absolute;
+  left: 27.875rem; /* 446px */
+  top: 10.9375rem; /* 175px */
+}
+.tao-ban-in {
+  background: #1488db;
+  border-radius: 1rem; /* 16px */
+  padding: 0.625rem; /* 10px */
+  display: flex;
+  flex-direction: row;
+  gap: 0.625rem; /* 10px */
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  width: 15rem; /* 240px */
+  height: 3rem; /* 48px */
+  position: absolute;
+  left: 1.5rem; /* 24px */
+  top: 12.625rem; /* 202px */
+  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25); /* 0px 4px 4px */
+  cursor: pointer;
+}
+.tao-ban-in:hover {
+  opacity: 0.85;
+}
+.group-1 {
+  flex-shrink: 0;
+  width: 12.875rem; /* 206px */
+  height: 1.75rem; /* 28px */
+  position: relative;
+}
+.tao-ban-in-moi {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Arial-Regular", sans-serif;
+  font-size: 1.5rem; /* 24px */
+  font-weight: 400;
+  position: absolute;
+  right: 0;
+  left: 18.18%;
+  width: 81.82%;
+  bottom: 0;
+  top: 0;
+  height: 100%;
+}
+.vector {
+  width: 10.1%;
+  height: 71.43%;
+  position: absolute;
+  right: 89.9%;
+  left: 0;
+  bottom: 14.29%;
+  top: 14.29%;
+  overflow: visible;
+}
+
+.trang-chu2 {
+  border-radius: 1rem; /* 16px */
+  padding: 0.625rem; /* 10px */
+  display: flex;
+  flex-direction: row;
+  gap: 1.0625rem; /* 17px */
+  align-items: center;
+  justify-content: flex-start;
+  width: 15rem; /* 240px */
+  position: absolute;
+  left: 1.5rem; /* 24px */
+  top: 12rem; /* 280px */
+  cursor: pointer;
+}
+.vector2 {
+  flex-shrink: 0;
+  width: 1.125rem; /* 18px */
+  height: 1.25125rem; /* 20.02px */
+  position: relative;
+  overflow: visible;
+}
+.trang-chu3 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Arial-Regular", sans-serif;
+  font-size: 1.5rem; /* 24px */
+  font-weight: 400;
+  position: relative;
+}
+.trang-chu2:hover .vector2,
+.trang-chu2:hover .trang-chu3 {
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.lich-su-in {
+  border-radius: 1rem;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 0.0625rem;
+  padding: 0.625rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  width: 15rem;
+  position: absolute;
+  left: 1.5rem;
+  top: 20.5rem;
+}
+
+.vector5 {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  position: relative;
+  overflow: visible;
+}
+.lich-su-in-an {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Arial-Regular", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  position: relative;
+}
+.lich-su-in:hover {
+  border-color: gray;
+}
+.lich-su-in:hover .vector5,
+.lich-su-in:hover .lich-su-in-an {
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.mua-trang-in {
+  border-radius: 1rem;
+  padding: 0.625rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  width: 15rem;
+  position: fixed;
+  left: 1.5rem;
+  top: 23.5rem;
+}
+.vector3 {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.25125rem;
+  position: relative;
+  overflow: visible;
+}
+.mua-trang-in2 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Arial-Regular", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  position: relative;
+}
+.mua-trang-in:hover .vector3,
+.mua-trang-in:hover .mua-trang-in2 {
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.khac {
+  border-radius: 1rem; /* 16px */
+  padding: 0.625rem; /* 10px */
+  display: flex;
+  flex-direction: row;
+  gap: 1.0625rem; /* 17px */
+  align-items: center;
+  justify-content: flex-start;
+  width: 15rem; /* 240px */
+  position: relative;
+  left: 1.5rem; /* 24px */
+  top: 26.625rem; /* 426px */
+  cursor: pointer;
+}
+.dot {
+  flex-shrink: 0;
+  width: 1.125rem; /* 18px */
+  height: 0.25rem; /* 4px */
+  position: relative;
+  overflow: visible;
+}
+.khac2 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Arial-Regular", sans-serif;
+  font-size: 1.5rem; /* 24px */
+  font-weight: 400;
+  position: relative;
+}
+.khac:hover .dot,
+.khac:hover .khac2 {
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.s-gi-y-c-n-l-i-120 {
+  color: #373a40;
+  text-align: left;
+  font-family: "Arial-Regular", sans-serif;
+  font-size: 1.5rem; /* 24px */
+  font-weight: 400;
+  position: relative;
+}
+
+.ng-xu-t {
+  padding: 0.625rem; /* 10px */
+  display: flex;
+  flex-direction: row;
+  gap: 1rem; /* 16px */
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  left: 1.5rem; /* 24px */
+  top: 53.25rem; /* 852px */
+}
+.logout-24-outline {
+  flex-shrink: 0;
+  width: 1.5rem; /* 24px */
+  height: 1.5rem; /* 24px */
+  position: relative;
+  overflow: visible;
+}
+.ng-xu-t2 {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Arial-Regular", sans-serif;
+  font-size: 1.5rem; /* 24px */
+  font-weight: 400;
+  position: relative;
+}
+.ng-xu-t:hover .logout-24-outline,
+.ng-xu-t:hover .ng-xu-t2 {
+  opacity: 0.8;
+}
+.ng-xu-t:hover .ng-xu-t2 {
+  text-decoration: underline;
+  text-decoration-color: white;
+  text-decoration-thickness: 0.125rem; /* 2px */
+}
+
+.container {
+  width: 75rem; /* 1200px */
+  padding-left: 12.5rem; /* 200px */
+  padding-top: 6.25rem; /* 100px */
+}

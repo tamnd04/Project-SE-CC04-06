@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /*------Color variables------*/
+    --black_900: #000000;
+    --black_900_3f: #0000003f;
+    --black_900_cc: #000000cc;
+    --blue_600: #1488db;
+    --gray_800: #373a40;
+    --gray_800_4c: #373a404c;
+    --gray_800_54: #373a4054;
+    --gray_800_99: #373a4099;
+    --gray_800_a8: #373a40a8;
+    --gray_800_cc: #373a40cc;
+    --indigo_900: #030391;
+    --white_a700: #ffffff;
+
+    /*------Shadow variables------*/
+    --shadow-xs: 0 4px 4px 0 #0000003f;
+
+    /*------Border radius variables------*/
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    /*------Spacing variables------*/
+    --space-xs: 2px;
+    --space-sm: 4px;
+    --space-md: 10px;
+    --space-lg: 14px;
+    --space-xl: 15px;
+    --space-2xl: 16px;
+    --space-3xl: 17px;
+    --space-4xl: 18px;
+    --space-5xl: 28px;
+    --space-6xl: 30px;
+    --space-7xl: 42px;
+    --space-8xl: 48px;
+    --space-9xl: 84px;
+    --space-10xl: 98px;
+    --space-11xl: 128px;
+    --space-12xl: 462px;
+  }
+  [type="text"],
+  input:where(:not([type])),
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  [multiple],
+  textarea,
+  select {
+    appearance: none;
+    background-color: transparent;
+    border-color: unset;
+    border-width: 0;
+    border-radius: unset;
+    padding: unset;
+    font-size: unset;
+    line-height: unset;
+  }
+
+  /* Override default focus colors for tailwindcss-forms https://github.com/tailwindlabs/tailwindcss-forms */
+  [type="text"]:focus,
+  [type="email"]:focus,
+  [type="url"]:focus,
+  [type="password"]:focus,
+  [type="number"]:focus,
+  [type="date"]:focus,
+  [type="search"]:focus,
+  [multiple]:focus,
+  textarea:focus,
+  select:focus {
+    --tw-ring-color: transparent;
+    border-color: transparent;
+  }
+  [type="radio"]:focus,
+  [type="checkbox"]:focus {
+    --tw-ring-color: transparent;
+  }
+}
