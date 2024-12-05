@@ -1,4 +1,4 @@
 How to run project:
-Step 1: Open terminal of this folder (HCMUT_SPSS).
+Step 1: Open terminal of this folder (HCMUT_SPSS folder).
 Step 2: type in terminal: npm install
 Step 3: npm run dev
