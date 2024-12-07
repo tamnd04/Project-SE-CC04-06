@@ -1,343 +1,254 @@
-import React from "react";
-import "./print_history.css";
+import React, { useState, useEffect, useRef } from "react";
+import { Helmet } from "react-helmet";
+import { Input, Heading } from "../../components/components";
+import SidebarStudent from "../../components/SidebarStudent/SidebarStudent";
+import { ReactTable } from "../../components/ReactTable/ReactTable"; // Fixed import
+import { createColumnHelper } from "@tanstack/react-table";
 
-export default function Printhistory() {
+const ENTRIES_PER_PAGE = 5; // Maximum entries per page
+const studentData = {
+  2252734: [
+    {
+      rowtntp: "Figma_Tutorial.pdf",
+      rowthigianin: "20/10/2024 15:33:30",
+      rowmmyin: "LTK_B4_1",
+      rowstrang: "5",
+      rowsbn: "2",
+    },
+    {
+      rowtntp: "DTB_Lab1.docx",
+      rowthigianin: "16/10/2024 08:06:18",
+      rowmmyin: "LTK_A3_2",
+      rowstrang: "4",
+      rowsbn: "1",
+    },
+    {
+      rowtntp: "ComNet_Assignment.pdf",
+      rowthigianin: "15/10/2024 12:45:13",
+      rowmmyin: "DA_H1_3",
+      rowstrang: "22",
+      rowsbn: "2",
+    },
+    {
+      rowtntp: "Java_Project.pdf",
+      rowthigianin: "22/10/2024 10:05:45",
+      rowmmyin: "DA_H3_1",
+      rowstrang: "12",
+      rowsbn: "3",
+    },
+    {
+      rowtntp: "Web_Dev_Quiz.docx",
+      rowthigianin: "18/10/2024 16:30:10",
+      rowmmyin: "LTK_A5_2",
+      rowstrang: "8",
+      rowsbn: "1",
+    },
+    {
+      rowtntp: "Data_Structures_Quiz.pdf",
+      rowthigianin: "23/10/2024 11:10:05",
+      rowmmyin: "DA_H2_3",
+      rowstrang: "5",
+      rowsbn: "2",
+    },
+    {
+      rowtntp: "AI_Research.docx",
+      rowthigianin: "16/10/2024 10:50:30",
+      rowmmyin: "LTK_C4_1",
+      rowstrang: "20",
+      rowsbn: "4",
+    },
+    {
+      rowtntp: "Blockchain_Notes.pdf",
+      rowthigianin: "21/10/2024 14:05:18",
+      rowmmyin: "DA_H6_1",
+      rowstrang: "10",
+      rowsbn: "2",
+    },
+  ],
+};
+
+export default function PrintinglogofStudentSPSOPage() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const historyPageMenuStyles = {
+    button: {
+      '&[data-history="true"]': {
+        borderColor: "white",
+        "&:hover": {
+          borderColor: "#b0b0b0",
+        },
+      },
+    },
+  };
+
+  const tableColumns = React.useMemo(() => {
+    const tableColumnHelper = createColumnHelper();
+    return [
+      tableColumnHelper.accessor("rowtntp", {
+        cell: (info) => (
+          <div className="text-black text-2xl p-4 text-left">
+            {info.getValue()}
+          </div>
+        ),
+        header: (info) => (
+          <div className="text-white-a700 text-2xl font-bold p-4 text-left">
+            Tên tệp
+          </div>
+        ),
+        meta: { width: "300px" },
+      }),
+      tableColumnHelper.accessor("rowthigianin", {
+        cell: (info) => (
+          <div className="text-black text-2xl p-4 text-center">
+            {info.getValue()}
+          </div>
+        ),
+        header: (info) => (
+          <div className="text-white-a700 text-2xl font-bold p-4 text-center">
+            Thời gian in
+          </div>
+        ),
+        meta: { width: "220px" },
+      }),
+      tableColumnHelper.accessor("rowmmyin", {
+        cell: (info) => (
+          <div className="text-black text-2xl p-4 text-center">
+            {info.getValue()}
+          </div>
+        ),
+        header: (info) => (
+          <div className="text-white-a700 text-2xl font-bold p-4 text-center">
+            Mã máy in
+          </div>
+        ),
+        meta: { width: "150px" },
+      }),
+      tableColumnHelper.accessor("rowstrang", {
+        cell: (info) => (
+          <div className="text-black text-2xl p-4 text-center">
+            {info.getValue()}
+          </div>
+        ),
+        header: (info) => (
+          <div className="text-white-a700 text-2xl font-bold p-4 text-center">
+            Số trang
+          </div>
+        ),
+        meta: { width: "120px" },
+      }),
+      tableColumnHelper.accessor("rowsbn", {
+        cell: (info) => (
+          <div className="text-black text-2xl p-4 text-center">
+            {info.getValue()}
+          </div>
+        ),
+        header: (info) => (
+          <div className="text-white-a700 text-2xl font-bold p-4 text-center">
+            Số bản
+          </div>
+        ),
+        meta: { width: "120px" },
+      }),
+    ];
+  }, []);
+
+  const filterData = (data) => {
+    if (!searchQuery) return data;
+
+    return data.filter((item) =>
+      Object.values(item).some((value) =>
+        value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  };
+
+  const getFilteredAndPaginatedData = () => {
+    const filtered = filterData(studentData["2252734"]); // Fixed to specific ID
+    const start = (currentPage - 1) * ENTRIES_PER_PAGE;
+    const end = start + ENTRIES_PER_PAGE;
+
+    return filtered.slice(start, end);
+  };
+
+  const getTotalPages = () => {
+    const filtered = filterData(studentData["2252734"]); // Fixed to specific ID
+    return Math.ceil(filtered.length / ENTRIES_PER_PAGE);
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const paginatedData = getFilteredAndPaginatedData();
+  const totalPages = getTotalPages();
+
   return (
-    <div className="home-students">
-      <div className="rectangle-1" />
-      <div className="group-4">
-        <div className="hcmut-ssps">
-          HCMUT
-          <br />
-          SSPS
-        </div>
-      </div>
-      <img className="_01-logobachkhoatoi-1" src="images/logobk.png" />
-      <div className="lichsuinan">LỊCH SỬ IN ẤN</div>
-      <a href="">
-        <div className="tao-ban-in">
-          <div className="group-1">
-            <div className="tao-ban-in-moi">Tạo bản in mới</div>
-            <img className="vector" src="images/+.svg" />
+    <>
+      <Helmet>
+        <title>Printing Log of Student SPSO</title>
+        <meta name="description" content="View printing logs for students." />
+      </Helmet>
+      <div className="flex w-full border border-solid border-black-900 bg-white-a700">
+        <SidebarStudent menuStyles={historyPageMenuStyles} />
+        <div className="flex flex-1 flex-col items-start gap-[4em] bg-white-a700 py-56 pl-20 pr-14 md:p-5">
+          <Heading
+            as="h1"
+            className="ml-4 font-arial text-[40px] font-bold tracking-[0.50px] text-indigo-900 md:ml-0 md:text-[38px] sm:text-[36px]"
+          >
+            LỊCH SỬ IN ẤN
+          </Heading>
+          <div className="w-[90%] px-14">
+            <div className="relative mb-4">
+              <div className="flex justify-end">
+                <Input
+                  size="xs"
+                  placeholder="Tìm kiếm..."
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className="w-64 h-10 rounded-lg border px-2.5 text-xl text-gray-800_cc transition-colors duration-200 focus:border-blue-500 focus:ring focus:ring-blue-200"
+                />
+              </div>
+            </div>
+            <div className="flex flex-col h-[450px]">
+              <div className="flex-grow overflow-auto">
+                <ReactTable
+                  columns={tableColumns}
+                  data={paginatedData}
+                  headerCellProps={{
+                    className: "bg-blue-600",
+                  }}
+                  cellProps={{
+                    className: "border-blue-600 border-b border-solid",
+                  }}
+                  className="w-full table-fixed"
+                />
+              </div>
+              {totalPages > 1 && (
+                <div className="mt-4 flex justify-center space-x-2">
+                  {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentPage(index + 1)}
+                      className={`px-3 py-1 rounded ${
+                        currentPage === index + 1
+                          ? "bg-blue-600 text-white-a700"
+                          : "bg-gray-200 text-black"
+                      }`}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </a>
-      <a href="student_homepage.html">
-        <div className="trang-chu2">
-          <img className="vector2" src="images/home.svg" />
-          <div className="trang-chu3">Trang chủ</div>
-        </div>
-      </a>
-      <a href="print_history.html">
-        <div className="lich-su-in">
-          <img className="vector5" src="images/history.svg" />
-          <div className="lich-su-in-an">Lịch sử in ấn</div>
-        </div>
-      </a>
-      <a href="">
-        <div className="mua-trang-in">
-          <img className="vector3" src="images/shopping_cart.svg" />
-          <div className="mua-trang-in2">Mua trang in</div>
-        </div>
-      </a>
-      <div className="khac">
-        <img className="dot" src="images/3dot.svg" />
-        <div className="khac2">Khác</div>
       </div>
-      <a href="LoginAs.html">
-        <div className="ng-xu-t">
-          <img
-            className="logout-24-outline"
-            src="images/login-24-outline0.svg"
-          />
-          <div className="ng-xu-t2">Đăng xuất</div>
-        </div>
-      </a>
-      <div className="container">
-        <table
-          id="example"
-          className="table table-striped"
-          style={{ width: "100%" }}
-        >
-          <thead>
-            <tr>
-              <th>Tên tệp</th>
-              <th>Thời gian in</th>
-              <th>Mã máy in</th>
-              <th>Số trang</th>
-              <th>Số bản</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Fimga_tutorial.pdf</td>
-              <td>25/04/2024 12:43:55</td>
-              <td>LTK-B4</td>
-              <td>3</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Lab1.docx</td>
-              <td>22/07/2024 11:22:55</td>
-              <td>LTK-A3</td>
-              <td>5</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Assingment1_SofEn.pdf</td>
-              <td>05/12/2024 9:12:21</td>
-              <td>LTK-C6</td>
-              <td>32</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Lich_Su_Dang.docx</td>
-              <td>12/03/2024 11:22:55</td>
-              <td>DA-H1</td>
-              <td>9</td>
-              <td>4</td>
-            </tr>
-            <tr>
-              <td>Math_Algebra_Introduction.pdf</td>
-              <td>25/04/2024 12:43:55</td>
-              <td>LTK-B4</td>
-              <td>15</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Math_Calculus_Theory.pdf</td>
-              <td>26/04/2024 09:12:40</td>
-              <td>LTK-A4</td>
-              <td>12</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Physics_Newton_Laws.pdf</td>
-              <td>27/04/2024 11:23:30</td>
-              <td>LTK-C6</td>
-              <td>18</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>Chemistry_Acids_and_Bases.pdf</td>
-              <td>28/04/2024 08:15:25</td>
-              <td>DA-H1</td>
-              <td>22</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>English_Literature_Shakespeare.pdf</td>
-              <td>29/04/2024 13:55:12</td>
-              <td>DA-H7</td>
-              <td>10</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>History_World_War_II.pdf</td>
-              <td>30/04/2024 14:02:55</td>
-              <td>LTK-B4</td>
-              <td>20</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Geography_Europe_Map.pdf</td>
-              <td>01/05/2024 09:30:11</td>
-              <td>LTK-A4</td>
-              <td>14</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Biology_Human_Cell_Structure.pdf</td>
-              <td>02/05/2024 10:25:43</td>
-              <td>LTK-C6</td>
-              <td>17</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Literature_Shakespeare_Quotes.pdf</td>
-              <td>03/05/2024 11:40:29</td>
-              <td>DA-H1</td>
-              <td>8</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>Math_Statistics_Basics.pdf</td>
-              <td>04/05/2024 14:12:50</td>
-              <td>DA-H7</td>
-              <td>16</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Physics_Electricity_Fundamentals.pdf</td>
-              <td>05/05/2024 15:00:45</td>
-              <td>LTK-B4</td>
-              <td>19</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Chemistry_Periodic_Table_Overview.pdf</td>
-              <td>06/05/2024 08:50:55</td>
-              <td>LTK-A4</td>
-              <td>11</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>History_Renaissance_Era_Art.pdf</td>
-              <td>07/05/2024 13:25:01</td>
-              <td>LTK-C6</td>
-              <td>30</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Biology_Animal_Cell_Structure.pdf</td>
-              <td>08/05/2024 14:22:44</td>
-              <td>DA-H1</td>
-              <td>25</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>English_Language_Grammar_Review.pdf</td>
-              <td>09/05/2024 10:14:35</td>
-              <td>DA-H7</td>
-              <td>18</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Geography_Asia_Countries.pdf</td>
-              <td>10/05/2024 11:55:29</td>
-              <td>LTK-B4</td>
-              <td>14</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Math_Linear_Equations_Solutions.pdf</td>
-              <td>11/05/2024 12:23:34</td>
-              <td>LTK-A4</td>
-              <td>13</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Physics_Heat_Transfer.pdf</td>
-              <td>12/05/2024 14:30:20</td>
-              <td>LTK-C6</td>
-              <td>24</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>Chemistry_Organic_Chemistry_Intro.pdf</td>
-              <td>13/05/2024 10:05:35</td>
-              <td>DA-H1</td>
-              <td>28</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>History_Industrial_Revolution.pdf</td>
-              <td>14/05/2024 13:45:01</td>
-              <td>DA-H7</td>
-              <td>22</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Biology_DNA_Structure.pdf</td>
-              <td>15/05/2024 09:20:22</td>
-              <td>LTK-B4</td>
-              <td>18</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>English_Speech_Writing.pdf</td>
-              <td>16/05/2024 11:05:00</td>
-              <td>LTK-A4</td>
-              <td>16</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>Geography_Africa_Landforms.pdf</td>
-              <td>17/05/2024 12:34:22</td>
-              <td>LTK-C6</td>
-              <td>20</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Math_Pythagorean_Theorem.pdf</td>
-              <td>18/05/2024 10:15:30</td>
-              <td>DA-H1</td>
-              <td>12</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Physics_Waves_and_Sound.pdf</td>
-              <td>19/05/2024 13:50:05</td>
-              <td>DA-H7</td>
-              <td>26</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Chemistry_Acid_Base_Reactions.pdf</td>
-              <td>20/05/2024 09:20:45</td>
-              <td>LTK-B4</td>
-              <td>14</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>History_Ancient_Greece_Philosophy.pdf</td>
-              <td>21/05/2024 11:35:55</td>
-              <td>LTK-A4</td>
-              <td>19</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>Literature_Modern_Literature_Themes.pdf</td>
-              <td>22/05/2024 15:40:10</td>
-              <td>LTK-C6</td>
-              <td>17</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Geography_Oceania.pdf</td>
-              <td>23/05/2024 12:25:55</td>
-              <td>DA-H1</td>
-              <td>13</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Biology_Respiratory_System.pdf</td>
-              <td>24/05/2024 14:50:12</td>
-              <td>DA-H7</td>
-              <td>28</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>Math_Probability_Basics.pdf</td>
-              <td>25/05/2024 09:35:25</td>
-              <td>LTK-B4</td>
-              <td>16</td>
-              <td>2</td>
-            </tr>
-            <tr>
-              <td>Physics_Quantum_Mechanics.pdf</td>
-              <td>26/05/2024 13:15:47</td>
-              <td>LTK-A4</td>
-              <td>25</td>
-              <td>3</td>
-            </tr>
-            <tr>
-              <td>Chemistry_Energy_Changes.pdf</td>
-              <td>27/05/2024 11:40:05</td>
-              <td>LTK-C6</td>
-              <td>18</td>
-              <td>1</td>
-            </tr>
-            <tr>
-              <td>History_French_Revolution.pdf</td>
-              <td>28/05/2024 14:22:30</td>
-              <td>DA-H1</td>
-              <td>12</td>
-              <td>3</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    </>
   );
 }
