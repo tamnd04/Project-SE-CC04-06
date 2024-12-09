@@ -54,7 +54,7 @@ export default function SidebarSPSO({ className, menuStyles, ...props }) {
       className={`${props.className} flex flex-col h-screen pt-6 gap-12 top-0 sm:pt-5 bg-indigo-900 !sticky overflow-auto`}
     >
       <div className="mt-3 self-stretch">
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/spso_homepage" style={{ textDecoration: "none" }}>
           <div className="flex items-start">
             <Img
               src="images/img_01_logobachkhoatoi.png"
@@ -75,17 +75,20 @@ export default function SidebarSPSO({ className, menuStyles, ...props }) {
         className="flex w-full flex-col self-stretch px-6 sm:px-5"
       >
         <div>
-          <MenuItem
-            icon={
-              <Img
-                src="images/img_home.svg"
-                alt="Home"
-                className="h-[20px] w-[18px]"
-              />
-            }
-          >
-            Trang chủ
-          </MenuItem>
+          <Link to="/spso_homepage" style={{ textDecoration: "none" }}>
+            <MenuItem
+              data-home="true"
+              icon={
+                <Img
+                  src="images/img_home.svg"
+                  alt="Home"
+                  className="h-[20px] w-[18px]"
+                />
+              }
+            >
+              Trang chủ
+            </MenuItem>
+          </Link>
           <Link to="/SPSOrules" style={{ textDecoration: "none" }}>
             <MenuItem
               data-rules="true"
@@ -128,17 +131,20 @@ export default function SidebarSPSO({ className, menuStyles, ...props }) {
               Lịch sử sinh viên
             </MenuItem>
           </Link>
-          <MenuItem
-            icon={
-              <Img
-                src="images/img_bar_graph_24.svg"
-                alt="Bargraphtwentyf"
-                className="h-[24px] w-[24px]"
-              />
-            }
-          >
-            Xem báo cáo
-          </MenuItem>
+          <Link to="/reportSPSO" style={{ textDecoration: "none" }}>
+            <MenuItem
+              data-report="true"
+              icon={
+                <Img
+                  src="images/img_bar_graph_24.svg"
+                  alt="Bargraphtwentyf"
+                  className="h-[24px] w-[24px]"
+                />
+              }
+            >
+              Xem báo cáo
+            </MenuItem>
+          </Link>
           <MenuItem
             icon={
               <Img

@@ -8,11 +8,13 @@ const shapes = {
 };
 const variants = {
   fill: {
-    gray_800_54: "bg-gray-800_54 text-white-a700",
+    gray_800_54: "bg-gray-400 text-white-a700",
     gray_800_4c: "bg-gray-800_4c text-white-a700",
     indigo_900: "bg-indigo-900 text-white-a700",
     blue_600: "bg-blue-600 shadow-xs text-white-a700",
     white_A700: "bg-white-a700",
+    green_600: "bg-green-600",
+    gray_600: "bg-gray-600",
   },
   outline: {
     blue_600: "border-blue-600 border border-solid text-gray-800",

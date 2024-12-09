@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { Input, Heading } from "../../components/components";
+import { Heading } from "../../components/components";
 import SidebarSPSO from "../../components/SidebarSPSO/SidebarSPSO";
 import PrinterList from "./PrinterList";
 import React from "react";

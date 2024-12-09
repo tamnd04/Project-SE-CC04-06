@@ -16,10 +16,10 @@ const AVAILABLE_STUDENT_IDS = [
 const studentData = {
   2252734: [
     {
-      rowtntp: "Figma_Tutorial.pdf",
-      rowthigianin: "20/10/2024 15:33:30",
-      rowmmyin: "LTK_B4_1",
-      rowstrang: "5",
+      rowtntp: "inthachot2015.pdf",
+      rowthigianin: "09/12/2024 08:33:31",
+      rowmmyin: "LTK_B2_3",
+      rowstrang: "11",
       rowsbn: "2",
     },
     {

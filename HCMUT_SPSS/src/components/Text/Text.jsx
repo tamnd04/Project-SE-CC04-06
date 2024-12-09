@@ -4,6 +4,7 @@ const sizes = {
   textxs: "text-[18px] font-normal",
   texts: "text-[20px] font-normal",
   textmd: "text-[24px] font-normal lg:text-[24px] md:text-[22px]",
+  textbold: "font-bold",
 };
 
 const Text = ({
@@ -17,7 +18,7 @@ const Text = ({
 
   return (
     <Component
-      className={`text-white-a700 font-arial ${className} ${sizes[size]} `}
+      className={`font-arial ${className} ${sizes[size]} `}
       {...restProps}
     >
       {children}

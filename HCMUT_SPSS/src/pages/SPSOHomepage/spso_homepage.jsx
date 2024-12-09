@@ -1,31 +1,8 @@
-import React, { useState, useEffect } from "react";
-import SidebarStudent from "../../components/SidebarStudent/SidebarStudent";
-import "./student_homepage.css";
+import React, { useState } from "react";
+import SidebarSPSO from "../../components/SidebarSPSO/SidebarSPSO";
+import "./spso_homepage.css";
 
-const StudentHomepage = () => {
-  const [remainingPages, setRemainingPages] = useState(10);
-
-  // Load remaining pages from localStorage and keep it updated
-  useEffect(() => {
-    const loadRemainingPages = () => {
-      const storedPages = localStorage.getItem("remainingPages");
-      if (storedPages) {
-        setRemainingPages(parseInt(storedPages));
-      }
-    };
-
-    // Load initial value
-    loadRemainingPages();
-
-    // Set up event listener for storage changes
-    window.addEventListener("storage", loadRemainingPages);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener("storage", loadRemainingPages);
-    };
-  }, []);
-
+const SPSOHomepage = () => {
   const stuhomePageMenuStyles = {
     button: {
       '&[data-home="true"]': {
@@ -36,11 +13,12 @@ const StudentHomepage = () => {
       },
     },
   };
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <>
       <div className="flex w-full border border-solid border-black-900 bg-white-a700">
-        <SidebarStudent menuStyles={stuhomePageMenuStyles} />
+        <SidebarSPSO menuStyles={stuhomePageMenuStyles} />
         <div
           style={{
             width: "100%",
@@ -57,21 +35,22 @@ const StudentHomepage = () => {
             style={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "flex-start",
-              padding: "100px 0px",
+              alignItems: "center", // Center all components horizontally
+              justifyContent: "flex-start", // Align components towards the top
+              padding: "100px 0px", // Adjust padding to create space
               position: "relative",
-              top: "120px",
+              top: "120px", // Position it down as needed
             }}
           >
+            {/* Heading */}
             <h2
               style={{
                 fontSize: "40px",
                 fontWeight: "700",
                 color: "#030391",
                 fontFamily: "Arial, var(--default-font-family)",
-                alignSelf: "flex-start",
-                marginLeft: "100px",
+                alignSelf: "flex-start", // Align heading separately
+                marginLeft: "100px", // Move it to the right
               }}
             >
               TRANG CHỦ
@@ -108,7 +87,7 @@ const StudentHomepage = () => {
                   right: "420px",
                 }}
               >
-                Chào mừng trở lại, Nguyễn Văn A.
+                Chào mừng trở lại, Phạm Xuân B.
               </span>
               <div
                 style={{
@@ -118,13 +97,14 @@ const StudentHomepage = () => {
                   marginTop: "20px",
                 }}
               >
+                {/* First Box */}
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "left",
                     alignItems: "center",
-                    width: "350px",
-                    height: "60px",
+                    width: "450px", // Adjusted width
+                    height: "60px", // Adjusted height
                     border: "1px solid #1488db",
                     borderRadius: "8px",
                     backgroundColor: "white",
@@ -133,33 +113,40 @@ const StudentHomepage = () => {
                     fontWeight: "400",
                     color: "#373a40",
                     paddingLeft: "7px",
-                    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                    marginTop: "100px",
+                    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Added drop shadow
+                    marginTop: "100px", // Move it down a bit
                   }}
                 >
-                  Số tài liệu đã in trong tuần: 2
+                  Tổng số tài liệu đã in trong tuần: 1234
                 </div>
 
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "left",
-                    alignItems: "center",
-                    width: "350px",
-                    height: "60px",
-                    border: "1px solid #1488db",
-                    borderRadius: "8px",
-                    backgroundColor: "white",
-                    fontSize: "25px",
-                    fontFamily: "Arial, var(--default-font-family)",
-                    fontWeight: "400",
-                    color: "#373a40",
-                    paddingLeft: "7px",
-                    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                  }}
-                >
-                  Số giấy còn lại: {remainingPages}
-                </div>
+                {/* Second Box */}
+                <a href="/reportSPSO" style={{ textDecoration: "none" }}>
+                  <div
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    style={{
+                      display: "flex",
+                      justifyContent: "left",
+                      alignItems: "center",
+                      width: "450px",
+                      height: "60px",
+                      border: "1px solid #1488db",
+                      borderRadius: "8px",
+                      backgroundColor: isHovered ? "#1488db" : "white",
+                      fontSize: "25px",
+                      fontFamily: "Arial, var(--default-font-family)",
+                      fontWeight: "400",
+                      color: isHovered ? "white" : "#373a40",
+                      paddingLeft: "7px",
+                      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Adds a drop shadow
+                      cursor: "pointer", // Makes the box look clickable
+                      transition: "all 0.3s ease", // Smooth transition effect
+                    }}
+                  >
+                    Xem báo cáo hệ thống
+                  </div>
+                </a>
               </div>
             </div>
           </div>
@@ -169,4 +156,4 @@ const StudentHomepage = () => {
   );
 };
 
-export default StudentHomepage;
+export default SPSOHomepage;

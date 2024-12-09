@@ -45,7 +45,7 @@ const LoginAs = () => {
           </span>
 
           {/* Sinh viên Button with Link */}
-          <Link to="/login">
+          <Link to="/loginstu">
             <button
               className="login-button"
               style={{
@@ -78,7 +78,7 @@ const LoginAs = () => {
           </Link>
 
           {/* SPSO Button with Link */}
-          <Link to="/login">
+          <Link to="/loginspso">
             <button
               className="login-button"
               style={{

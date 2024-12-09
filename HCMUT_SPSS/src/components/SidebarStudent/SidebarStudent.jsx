@@ -53,7 +53,7 @@ export default function SidebarStudent({ className, menuStyles, ...props }) {
       className={`${props.className} flex flex-col h-screen pt-6 gap-12 top-0 sm:pt-5 bg-indigo-900 !sticky overflow-auto`}
     >
       <div className="mt-3 self-stretch">
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="/student_homepage" style={{ textDecoration: "none" }}>
           <div className="flex items-start">
             <Img
               src="images/img_01_logobachkhoatoi.png"
@@ -67,21 +67,22 @@ export default function SidebarStudent({ className, menuStyles, ...props }) {
             />
           </div>
         </Link>
-
-        <Button
-          color="blue_600"
-          size="xl"
-          leftIcon={
-            <Img
-              src="images/img_close.svg"
-              alt="Login / 24 / Outline"
-              className="mb-0.5 h-[30px] w-[24px] object-contain"
-            />
-          }
-          className="mt-10 min-w-[182px] gap-[18px] rounded-2xl font-arial font-normal shadow-lg mx-auto block"
-        >
-          Tạo bản in mới
-        </Button>
+        <Link to="/newprint" style={{ textDecoration: "none" }}>
+          <Button
+            color="blue_600"
+            size="xl"
+            leftIcon={
+              <Img
+                src="images/img_close.svg"
+                alt="Login / 24 / Outline"
+                className="mb-0.5 h-[30px] w-[24px] object-contain group-hover:grayscale group-hover:opacity-50"
+              />
+            }
+            className="mt-10 min-w-[182px] gap-[18px] rounded-2xl font-arial font-normal shadow-lg mx-auto block bg-blue-600 hover:bg-blue-700 text-white-a700 hover:text-gray-400 group transition-colors"
+          >
+            Tạo bản in mới
+          </Button>
+        </Link>
       </div>
 
       <Menu
@@ -118,17 +119,20 @@ export default function SidebarStudent({ className, menuStyles, ...props }) {
               Lịch sử in ấn
             </MenuItem>
           </Link>
-          <MenuItem
-            icon={
-              <Img
-                src="images/shopping_cart.svg"
-                alt="Bargraphtwentyf"
-                className="h-[24px] w-[24px]"
-              />
-            }
-          >
-            Mua trang in
-          </MenuItem>
+          <Link to="/buypages" style={{ textDecoration: "none" }}>
+            <MenuItem
+              data-buy="true"
+              icon={
+                <Img
+                  src="images/shopping_cart.svg"
+                  alt="Bargraphtwentyf"
+                  className="h-[24px] w-[24px]"
+                />
+              }
+            >
+              Mua trang in
+            </MenuItem>
+          </Link>
           <MenuItem
             icon={
               <Img
