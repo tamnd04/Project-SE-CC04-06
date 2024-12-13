@@ -41,6 +41,18 @@ npm run dev
 ```
 The terminal will provide a local development URL (e.g., `http://localhost:5173`). Open this URL in your browser to view the project.
 
+## Login Accounts
+- For the student:
+     ```
+     Username: 2252734
+     Password: 1234
+     ```
+- For the SPSO:
+     ```
+     Username: spso
+     Password: spso
+     ```
+
 # Contributors
 This project is developed by group 06 class CC04 of Computer Science students from Ho Chi Minh University of Technology (HCMUT). Our members of the team:
 
