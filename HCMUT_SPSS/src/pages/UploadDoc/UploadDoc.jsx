@@ -44,7 +44,8 @@ const UploadDoc = () => {
           type: file.type,
           content: e.target.result,
         };
-        setUploadedFiles((prev) => [...prev, newFile]);
+        setUploadedFiles([newFile]); // Ensure only one file is added
+        localStorage.setItem("selectedFileName", file.name);
       };
       reader.readAsDataURL(file);
       setShowError(false);
@@ -58,21 +59,34 @@ const UploadDoc = () => {
     e.preventDefault();
     setIsDragging(false);
     const files = Array.from(e.dataTransfer.files);
-    files.forEach(validateAndAddFile);
+    if (files.length === 1) {
+      validateAndAddFile(files[0]); // Only process the first file
+    } else {
+      setShowError(true); // Show error if multiple files are dropped
+      setTimeout(() => setShowError(false), 3000);
+    }
   };
 
   const handleFileInput = (e) => {
     const files = Array.from(e.target.files);
-    files.forEach(validateAndAddFile);
+    if (files.length === 1) {
+      validateAndAddFile(files[0]); // Only process the first file
+    } else {
+      setShowError(true); // Show error if multiple files are selected
+      setTimeout(() => setShowError(false), 3000);
+    }
   };
 
   const removeFile = (index) => {
-    setUploadedFiles((prev) => prev.filter((_, i) => i !== index));
+    if (localStorage.getItem("selectedFileName"))
+      localStorage.removeItem("selectedFileName");
+    setUploadedFiles([]);
   };
 
   const handleFileClick = (file) => {
     setSelectedFileContent(file);
   };
+
   return (
     <>
       <Helmet>
@@ -142,7 +156,7 @@ const UploadDoc = () => {
                   onChange={handleFileInput}
                   accept=".docx,.pdf"
                   className="hidden"
-                  multiple
+                  single
                 />
 
                 <div
@@ -171,6 +185,8 @@ const UploadDoc = () => {
                           Bạn có thể kéo và thả tệp vào đây
                           <br />
                           hoặc nhấn nút "Tải lên" ở dưới
+                          <br />
+                          (Bạn chỉ có thể đăng tải 1 file)
                         </Text>
                         <Button
                           onClick={() => fileInputRef.current.click()}

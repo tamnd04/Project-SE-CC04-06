@@ -3,7 +3,7 @@ import SidebarStudent from "../../components/SidebarStudent/SidebarStudent";
 import "./student_homepage.css";
 
 const StudentHomepage = () => {
-  const [remainingPages, setRemainingPages] = useState(10);
+  const [remainingPages, setRemainingPages] = useState(0);
 
   // Load remaining pages from localStorage and keep it updated
   useEffect(() => {

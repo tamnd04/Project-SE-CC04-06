@@ -14,51 +14,6 @@ export default function PrintingPropertiesSection() {
   const [pageCount, setPageCount] = useState("");
   const [printSides, setPrintSides] = useState("");
   const [copies, setCopies] = useState("");
-  const [maxPages, setMaxPages] = useState(0);
-
-  useEffect(() => {
-    // Load saved values on component mount
-    const savedPaperSize = localStorage.getItem("paperSize");
-    const savedPageCount = localStorage.getItem("pageCount");
-    const savedPrintSides = localStorage.getItem("printSides");
-    const savedCopies = localStorage.getItem("copies");
-
-    if (savedPaperSize) setPaperSize(savedPaperSize);
-    if (savedPageCount) setPageCount(savedPageCount);
-    if (savedPrintSides) setPrintSides(savedPrintSides);
-    if (savedCopies) setCopies(savedCopies);
-
-    // Get max pages from uploaded files
-    const uploadedFiles = JSON.parse(
-      localStorage.getItem("uploadedFiles") || "[]"
-    );
-    const totalPages = uploadedFiles.reduce(
-      (sum, file) => sum + (file.pages || 0),
-      0
-    );
-    setMaxPages(totalPages);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("paperSize", paperSize || "");
-    localStorage.setItem("pageCount", pageCount || "");
-    localStorage.setItem("printSides", JSON.stringify(printSides));
-    localStorage.setItem("copies", copies || "");
-  }, [paperSize, pageCount, printSides, copies]);
-
-  const handleNumberInput = (e, setter, max = null) => {
-    const value = e.target.value.replace(/[^0-9]/g, "");
-    if (value === "") {
-      setter(value);
-    } else {
-      const numValue = parseInt(value);
-      if (max !== null && numValue > max) {
-        setter(max.toString());
-      } else if (numValue > 0) {
-        setter(value);
-      }
-    }
-  };
 
   const paperSizeOptions = [
     { label: "khổ A3", value: "A3" },
@@ -70,6 +25,79 @@ export default function PrintingPropertiesSection() {
     { label: "1 mặt", value: "1" },
     { label: "2 mặt", value: "2" },
   ];
+
+  useEffect(() => {
+    // Load saved values on component mount
+    const savedPaperSize = localStorage.getItem("paperSize");
+    const savedPageCount = localStorage.getItem("pageCount");
+    const savedPrintSides = localStorage.getItem("printSides");
+    const savedCopies = localStorage.getItem("copies");
+
+    if (savedPaperSize) {
+      const option = paperSizeOptions.find(
+        (opt) => opt.value === savedPaperSize
+      );
+      if (option) {
+        localStorage.setItem("paperSizeLabel", option.label);
+      }
+    }
+    if (savedPageCount) setPageCount(savedPageCount);
+    if (savedPrintSides) setPrintSides(savedPrintSides);
+    if (savedCopies) setCopies(savedCopies);
+  }, []);
+
+  const handleNumberInput = (e, setter, max = null, key) => {
+    const value = e.target.value.replace(/[^0-9]/g, "");
+    if (value === "") {
+      setter(value);
+    } else {
+      const numValue = parseInt(value);
+      if (max !== null && numValue > max) {
+        setter(max.toString());
+      } else if (numValue > 0) {
+        setter(value);
+      }
+    }
+
+    // Save the input value to localStorage
+    if (key) {
+      localStorage.setItem(key, value);
+    }
+  };
+
+  const handlePaperSizeChange = (value) => {
+    console.log("Setting paper size:", value); // Debug log
+    setPaperSize(value);
+    const paperSizeValue = value.value || value;
+    const selectedOption = paperSizeOptions.find(
+      (opt) => opt.value === paperSizeValue
+    );
+    console.log("Selected option:", selectedOption);
+    if (selectedOption) {
+      localStorage.setItem("paperSize", value);
+      localStorage.setItem("paperSizeLabel", selectedOption.label);
+      console.log("Saved paper size label:", selectedOption.label); // Debug log
+    }
+  };
+
+  const handlePrintSidesChange = (value) => {
+    console.log("Setting print sides:", value); // Debug log
+    setPrintSides(value);
+    const paperSizeValue = value.value || value;
+    const selectedOption = printSidesOptions.find(
+      (opt) => opt.value === paperSizeValue
+    );
+    if (selectedOption) {
+      localStorage.setItem("printSides", value.value);
+      console.log(
+        "Saved print sides:",
+        selectedOption.label,
+        " ",
+        selectedOption.value
+      ); // Confirm label
+    }
+  };
+
   return (
     <>
       <div className="px-14 md:px-5">
@@ -94,7 +122,7 @@ export default function PrintingPropertiesSection() {
               <SelectBox
                 shape="round"
                 value={paperSize}
-                onChange={(value) => setPaperSize(value)}
+                onChange={handlePaperSizeChange}
                 placeholder="Chọn cỡ giấy"
                 options={paperSizeOptions}
                 className="flex-1 min-w-[300px]"
@@ -112,7 +140,9 @@ export default function PrintingPropertiesSection() {
               <Input
                 type="text"
                 value={pageCount}
-                onChange={(e) => handleNumberInput(e, setPageCount)}
+                onChange={(e) =>
+                  handleNumberInput(e, setPageCount, null, "pageCount")
+                }
                 placeholder={`Điền số trang in `}
                 className="flex-1 min-w-[300px]"
               />
@@ -129,7 +159,7 @@ export default function PrintingPropertiesSection() {
               <SelectBox
                 shape="round"
                 value={printSides}
-                onChange={(value) => setPrintSides(value)}
+                onChange={handlePrintSidesChange}
                 placeholder="Chọn số mặt in"
                 options={printSidesOptions}
                 className="flex-1 min-w-[300px]"
@@ -147,7 +177,9 @@ export default function PrintingPropertiesSection() {
               <Input
                 type="text"
                 value={copies}
-                onChange={(e) => handleNumberInput(e, setCopies)}
+                onChange={(e) =>
+                  handleNumberInput(e, setCopies, null, "copies")
+                }
                 placeholder="Điền số bản in"
                 className="flex-1 min-w-[300px]"
               />

@@ -1,7 +1,7 @@
 import { Img } from "../Img/Img";
 import React from "react";
 import { MenuItem, Menu, Sidebar, sidebarClasses } from "react-pro-sidebar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../Button/Button"; // Add this import
 
 export default function SidebarStudent({ className, menuStyles, ...props }) {
@@ -37,10 +37,29 @@ export default function SidebarStudent({ className, menuStyles, ...props }) {
     },
   };
 
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.setItem("isAuthenticated", "false");
     localStorage.setItem("role", "");
     navigate("/");
+  };
+
+  const handleNewPrintClick = () => {
+    localStorage.removeItem("selectedFileName");
+    localStorage.removeItem("uploadedFiles");
+    localStorage.removeItem("selectedLocationLabel");
+    localStorage.removeItem("selectedLocationValue");
+    localStorage.removeItem("selectedBuildingLabel");
+    localStorage.removeItem("selectedBuildingValue");
+    localStorage.removeItem("selectedPrinter");
+    localStorage.removeItem("selectedPrinterLabel");
+    localStorage.removeItem("paperSize");
+    localStorage.removeItem("paperSizeLabel");
+    localStorage.removeItem("pageCount");
+    localStorage.removeItem("printSides");
+    localStorage.removeItem("copies");
+    navigate("/newprint");
   };
 
   return (
@@ -67,22 +86,21 @@ export default function SidebarStudent({ className, menuStyles, ...props }) {
             />
           </div>
         </Link>
-        <Link to="/newprint" style={{ textDecoration: "none" }}>
-          <Button
-            color="blue_600"
-            size="xl"
-            leftIcon={
-              <Img
-                src="images/img_close.svg"
-                alt="Login / 24 / Outline"
-                className="mb-0.5 h-[30px] w-[24px] object-contain group-hover:grayscale group-hover:opacity-50"
-              />
-            }
-            className="mt-10 min-w-[182px] gap-[18px] rounded-2xl font-arial font-normal shadow-lg mx-auto block bg-blue-600 hover:bg-blue-700 text-white-a700 hover:text-gray-400 group transition-colors"
-          >
-            Tạo bản in mới
-          </Button>
-        </Link>
+        <Button
+          color="blue_600"
+          size="xl"
+          leftIcon={
+            <Img
+              src="images/img_close.svg"
+              alt="Login / 24 / Outline"
+              className="mb-0.5 h-[30px] w-[24px] object-contain group-hover:grayscale group-hover:opacity-50"
+            />
+          }
+          className="mt-10 min-w-[182px] gap-[18px] rounded-2xl font-arial font-normal shadow-lg mx-auto block bg-blue-600 hover:bg-blue-700 text-white-a700 hover:text-gray-400 group transition-colors"
+          onClick={handleNewPrintClick}
+        >
+          Tạo bản in mới
+        </Button>
       </div>
 
       <Menu

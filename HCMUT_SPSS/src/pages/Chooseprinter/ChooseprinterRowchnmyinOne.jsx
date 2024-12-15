@@ -7,16 +7,20 @@ const locationOptions = [
   { label: "Cơ sở Dĩ An", value: "DA" },
 ];
 
-const buildingOptions = [
-  { label: "A1", value: "A1" },
-  { label: "A2", value: "A2" },
-  { label: "B1", value: "B1" },
-  { label: "B2", value: "B2" },
-  { label: "C4", value: "C4" },
-  { label: "H1", value: "H1" },
-  { label: "H2", value: "H2" },
-  { label: "H6", value: "H6" },
-];
+const buildingOptionsMap = {
+  LTK: [
+    { label: "A1", value: "A1" },
+    { label: "A2", value: "A2" },
+    { label: "B1", value: "B1" },
+    { label: "B2", value: "B2" },
+    { label: "C4", value: "C4" },
+  ],
+  DA: [
+    { label: "H1", value: "H1" },
+    { label: "H2", value: "H2" },
+    { label: "H6", value: "H6" },
+  ],
+};
 
 const printerOptions = [
   { label: "1", value: "1" },
@@ -25,9 +29,10 @@ const printerOptions = [
 ];
 
 export default function ChooseprinterRowchnmyinOne() {
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedBuilding, setSelectedBuilding] = useState("");
-  const [selectedPrinter, setSelectedPrinter] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedBuilding, setSelectedBuilding] = useState(null);
+  const [selectedPrinter, setSelectedPrinter] = useState(null);
+  const [availableBuildings, setAvailableBuildings] = useState([]);
 
   useEffect(() => {
     // Load initial values
@@ -39,34 +44,50 @@ export default function ChooseprinterRowchnmyinOne() {
       const locationOption = locationOptions.find(
         (opt) => opt.value === savedLocation
       );
-      setSelectedLocation(savedLocation);
+      if (locationOption) {
+        setSelectedLocation(locationOption); // Set the full option object
+        setAvailableBuildings(buildingOptionsMap[savedLocation] || []);
+      }
     }
-    if (savedBuilding) {
-      const buildingOption = buildingOptions.find(
+
+    if (savedBuilding && availableBuildings.length > 0) {
+      const buildingOption = availableBuildings.find(
         (opt) => opt.value === savedBuilding
       );
-      setSelectedBuilding(savedBuilding);
+      if (buildingOption) {
+        setSelectedBuilding(buildingOption); // Set the full option object
+      }
     }
-    if (savedPrinter) setSelectedPrinter(savedPrinter);
-  }, []);
 
-  const handleLocationChange = (value) => {
-    setSelectedLocation(value);
-    const selectedOption = locationOptions.find((opt) => opt.value === value);
-    localStorage.setItem("selectedLocation", value);
-    localStorage.setItem("selectedLocationLabel", selectedOption.label);
+    if (savedPrinter) {
+      const printerOption = printerOptions.find(
+        (opt) => opt.value === savedPrinter
+      );
+      if (printerOption) {
+        setSelectedPrinter(printerOption); // Set the full option object
+      }
+    }
+  }, [availableBuildings]);
+
+  const handleLocationChange = (option) => {
+    setSelectedLocation(option);
+    setSelectedBuilding(null); // Reset building selection
+    setAvailableBuildings(buildingOptionsMap[option.value] || []);
+
+    localStorage.setItem("selectedLocationValue", option.value);
+    localStorage.setItem("selectedLocationLabel", option.label);
   };
 
-  const handleBuildingChange = (value) => {
-    setSelectedBuilding(value);
-    const selectedOption = buildingOptions.find((opt) => opt.value === value);
-    localStorage.setItem("selectedBuilding", value);
-    localStorage.setItem("selectedBuildingLabel", selectedOption.label);
+  const handleBuildingChange = (option) => {
+    setSelectedBuilding(option);
+    localStorage.setItem("selectedBuildingValue", option.value);
+    localStorage.setItem("selectedBuildingLabel", option.label);
   };
 
-  const handlePrinterChange = (value) => {
-    setSelectedPrinter(value);
-    localStorage.setItem("selectedPrinter", value);
+  const handlePrinterChange = (option) => {
+    setSelectedPrinter(option);
+    localStorage.setItem("selectedPrinter", option.value);
+    localStorage.setItem("selectedPrinterLabel", option.label);
   };
 
   return (
@@ -111,7 +132,7 @@ export default function ChooseprinterRowchnmyinOne() {
             placeholder="Chọn tòa"
             value={selectedBuilding}
             onChange={handleBuildingChange}
-            options={buildingOptions}
+            options={availableBuildings}
             className="w-full min-w-[300px] rounded border px-4 py-2 font-arial"
           />
 

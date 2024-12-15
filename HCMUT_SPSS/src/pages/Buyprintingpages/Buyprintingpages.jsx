@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "../../components/components";
 import SidebarStudent from "../../components/SidebarStudent/SidebarStudent";
+import { Link } from "react-router-dom";
 
 const BuyPages = () => {
-  const [remainingPages, setRemainingPages] = useState(10);
+  const [remainingPages, setRemainingPages] = useState(0);
   const [pagesToBuy, setPagesToBuy] = useState("");
-  const [totalAmount, setTotalAmount] = useState(10);
+  const [totalAmount, setTotalAmount] = useState(0);
   const PRICE_PER_PAGE = 2000; // 2k per page
 
   const BuyPagesMenuStyles = {
@@ -25,7 +26,7 @@ const BuyPages = () => {
     if (storedPages) {
       setRemainingPages(parseInt(storedPages));
     } else {
-      localStorage.setItem("remainingPages", "10");
+      localStorage.setItem("remainingPages", "0");
     }
   }, []);
 
@@ -90,6 +91,14 @@ const BuyPages = () => {
       >
         Xác nhận thanh toán
       </Button>
+      <Link to="/startprint" style={{ textDecoration: "none" }}>
+        <Button
+          shape="round"
+          className="px-2.5 py-5 left-[780px] top-[800px] absolute bg-[#1488db] rounded-[15px] shadow justify-start items-center gap-[15px] inline-flex hover:bg-blue-500 transition-colors text-3xl text-white"
+        >
+          Quay về trang xác nhận in
+        </Button>
+      </Link>
 
       <div className="h-[143px] left-[751px] top-[531px] absolute justify-start items-center gap-[15px] inline-flex">
         <div className="p-2.5 justify-center items-end gap-2.5 flex">
